@@ -28,10 +28,11 @@ def typex(text,speed,colour):
 
 def config():
     speed=0.001
+    current_settings()
     typex(config_banner,speed,magenta)
     typex("Settings:",speed,white)
     typex(config_menu,speed,white)
-    user_config = (input(">>"))
+    user_config = (input("(config)>>"))
     
     if user_config == "1":
         change_colour()
@@ -43,20 +44,24 @@ def config():
 
 #main function
 def type_writer():
-    # print_banners("t")
+    print_banners("t")
+    colour=user_choice["colour"]
     typex(ask_for_input,0.01,yellow)
+    typex("Type 'config:' to change the configuration settings;Type 'quit:' to quit",0.01,colour)
     while True:
         text=str(input(">>"))
         speed=user_choice["speed"]
         colour=user_choice["colour"]
         if text == "config:":
             config()
+        elif text=="quit:":
+            quit()
         else:
             typex(text,speed,colour)
 
 
 def print_banners(x):
-    speed=0.01
+    speed=0.001
     if x == "t":
         typex(type_banner,speed,cyan)
         typex(by_mathenge,speed,green)
@@ -114,7 +119,7 @@ def change_colour():
 
 def change_speed():
     speed_menu = " \n Change Speed To :\n 1.Fast \n 2.Moderate \n 3.Slow \n ---------------- \n 4.Quit"
-    typex(speed_menu,0.05,white)
+    typex(speed_menu,0.01,white)
     user_speed_input = str(input("(config) \ Speed >>"))
     if user_speed_input == "1":
         change_speed_to_fast()
@@ -141,49 +146,74 @@ def update():
 #changing colour
 def change_colour_to_cyan():
     user_choice["colour"]=cyan
+    print(" \n Color changed to Cyan!")
     update()
         
 def change_colour_to_magenta():
     user_choice["colour"]=magenta
     update()
+    print(" \n Color changed to Magenta!")
     type_writer()
         
 def change_colour_to_green():
     user_choice["colour"]=green
     update()
+    print(" \n Color changed to Green!")
     type_writer()
     
 def change_colour_to_red():
     user_choice["colour"]= red
     update()
+    print(" \n Color changed to Red!")
     type_writer()
     
 def change_colour_to_blue():
     user_choice["colour"]=blue
     update()
+    print(" \n Color changed to Blue!")
     type_writer()
     
 def change_colour_to_white():
     user_choice["colour"]=white
     update()
+    print(" \n Color changed to White!")
     type_writer()
 
 
 #changing speed
 def change_speed_to_fast():
-    user_choice["speed"]=0.01
+    user_choice["speed"]="0.01"
     update()
+    print(" \n Speed changed to fast!")
     type_writer()
 def change_speed_to_moderate():
-    user_choice["speed"]=0.5
+    user_choice["speed"]="0.05"
     update()
+    print(" \n Speed changed to moderate!")
     type_writer()
 def change_speed_to_slow():
-    user_choice["speed"]=0.1
+    user_choice["speed"]="0.1"
     update()
+    print(" \n Speed changed to slow!")
     type_writer()
     
+def current_settings():
+    speed=str(user_choice["speed"])
+    colour=user_choice["colour"]
+    mode=user_choice["mode"]
+    print("Current mode:",mode)
+    print(""+colour)
+    print("Current Color"+reset)
+    current_speed=''
+    if speed=="0.05":
+        current_speed="Moderate"
+    elif speed=="0.01":
+        current_speed="Fast"
+    elif speed=="0.1":
+        current_speed="Slow"
+        
+    print(current_speed)
     
+        
 clear()   
 check_mode()
-
